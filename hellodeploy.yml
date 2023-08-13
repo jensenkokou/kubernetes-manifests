@@ -1,0 +1,22 @@
+apiVersion: apps/v1 # The API version for the Kubernetes Deployment object
+kind: Deployment # Specifies the kind of object, in this case, a Deployment
+metadata:
+  name: hello # Name of the Deployment
+spec:
+  replicas: 2 # Number of desired replicas (instances) of the application
+  selector:
+    matchLabels:
+      app: hello # The labels used to match pods controlled by this Deployment
+  strategy:
+    type: Recreate # The update strategy for the Deployment (Recreate strategy)
+  template:
+    metadata:
+      name: hello # Name of the pod template
+      labels:
+        app: hello # Labels applied to pods created from this template
+    spec:
+      containers: # The containers specification within the pod template
+      - name: helloworld # Name of the container within the pod
+        image: mylandmarktech/hello:2 # Docker image used for the container
+        ports:
+        - containerPort: 80 # Port on which the container listens for traffic
