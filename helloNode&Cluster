@@ -1,0 +1,26 @@
+# NodePort Service
+kind: Service
+apiVersion: v1
+metadata:
+  name: hellosvc
+spec:
+  selector:
+    app: hello # Selecting pods with the label "app: hello"
+  type: NodePort # Service type is NodePort, accessible externally
+  ports:
+    - port: 80 # Service port exposed externally
+      targetPort: 80 # Port that pods are listening on
+      nodePort: 32000 # Port accessible on the nodes, between [30000-32676]
+
+# ClusterIP Service
+kind: Service
+apiVersion: v1
+metadata:
+  name: hellosvc-cluster # Name of the ClusterIP service
+spec:
+  selector:
+    app: hello # Selecting pods with the label "app: hello"
+  type: ClusterIP # Service type is ClusterIP, accessible only within the cluster
+  ports:
+    - port: 80 # Service port exposed within the cluster
+      targetPort: 80 # Port that pods are listening on
